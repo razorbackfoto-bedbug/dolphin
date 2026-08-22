@@ -1,1 +1,0 @@
-Bug-fix branch notes: duplicate GitHub Pages deployment removed and HTML structure audit added. The existing index.html still needs structural repair before production merge.
