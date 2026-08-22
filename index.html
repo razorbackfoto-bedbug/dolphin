@@ -1,7 +1,13 @@
-<title>Dolphin's Car Wash & Detail</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Dolphin's Car Wash & Detail in Malvern, Arkansas. Hand wash, touchless wash, full interior detailing and ceramic sealant.">
+  <title>Dolphin's Car Wash & Detail</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -103,7 +109,6 @@
     color: var(--gold-deep);
   }
 
-  /* NAV */
   nav {
     position: sticky;
     top: 0;
@@ -156,7 +161,6 @@
     outline-offset: 3px;
   }
 
-  /* HERO */
   .hero {
     position: relative;
     background: var(--ink);
@@ -247,7 +251,6 @@
     margin-top: 8px;
   }
 
-  /* SECTION SHELL */
   section { padding: 76px 0; }
   .section-head {
     max-width: 56ch;
@@ -263,7 +266,6 @@
     margin-top: 12px;
   }
 
-  /* SERVICES */
   .services-grid {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -331,7 +333,6 @@
   }
   .card .book-link:hover { text-decoration: underline; }
 
-  /* GALLERY */
   .gallery-grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -353,6 +354,7 @@
     color: rgba(255,255,255,0.9);
     text-transform: uppercase;
     position: relative;
+    z-index: 1;
   }
   .shot.g1 { background: linear-gradient(160deg, #2b2f36, #14171b 70%); }
   .shot.g2 { background: linear-gradient(160deg, #4a3418, #1c1610 70%); }
@@ -364,7 +366,6 @@
     background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);
   }
 
-  /* TESTIMONIALS */
   .testi-note {
     font-family: "Roboto Mono", monospace;
     font-size: 0.78rem;
@@ -395,7 +396,6 @@
     letter-spacing: 0.04em;
   }
 
-  /* BOOKING */
   .booking {
     background: var(--ink-soft);
     color: var(--paper);
@@ -455,13 +455,11 @@
     font-weight: 700;
     border-radius: 2px;
     margin-top: 6px;
-    cursor: pointer;
+    cursor: default;
     font-size: 0.92rem;
   }
-  .bw-cta:hover { background: var(--red-deep); }
   .bw-foot { font-family: "Roboto Mono", monospace; font-size: 0.66rem; color: var(--text-mute); text-align: center; margin-top: 10px; }
 
-  /* INFO STRIP */
   .info-strip {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -495,7 +493,9 @@
     .hero-stats { grid-template-columns: 1fr 1fr; }
   }
 </style>
+</head>
 
+<body>
 <div class="demo-flag">MOCKUP FOR PITCH USE ONLY &nbsp;·&nbsp; business info pulled from their real Yelp/Facebook listings &nbsp;·&nbsp; <b>confirm pricing &amp; add real photos</b> before showing the owner</div>
 
 <nav>
@@ -507,7 +507,7 @@
       <li><a href="#reviews">Reviews</a></li>
       <li><a href="#book">Hours &amp; Location</a></li>
     </ul>
-    <button class="nav-cta">Book Now</button>
+    <a class="nav-cta" href="#book">Book Now</a>
   </div>
 </nav>
 
@@ -626,7 +626,7 @@
       <p class="eyebrow">Skip the phone tag</p>
       <h2>Book online,<br>anytime.</h2>
       <p>Free Square Appointments widget, embedded right on the site — customers grab an open slot without calling during a Saturday rush, and get an automatic text reminder the day before. Same account can take card payment on-site if they ever want that too.</p>
-      <p style="margin-top:22px"><a class="btn-primary" href="#">Open Full Scheduler</a></p>
+      <p style="margin-top:22px"><a class="btn-primary" href="#contact">Request Booking Setup</a></p>
     </div>
     <div class="book-widget" aria-label="Sample Square Appointments booking widget">
       <div class="bw-head">
@@ -639,13 +639,13 @@
       <div class="bw-slot"><span>Full Detail</span><b>9:00 AM</b></div>
       <div class="bw-slot"><span>Full Detail</span><b>11:30 AM</b></div>
       <div class="bw-slot"><span>Touchless Wash</span><b>2:00 PM</b></div>
-      <button class="bw-cta">Confirm 11:30 AM — Full Detail</button>
-      <div class="bw-foot">Confirmation &amp; reminder sent by text automatically · square.com</div>
+      <button class="bw-cta" type="button" disabled aria-disabled="true">Sample slot — connect Square to enable booking</button>
+      <div class="bw-foot">Preview only · Connect the owner's Square Appointments account before publishing</div>
     </div>
   </div>
 </section>
 
-<section>
+<section id="contact">
   <div class="wrap">
     <div class="info-strip">
       <div class="card">
@@ -658,7 +658,7 @@
       </div>
       <div class="card">
         <h3>Contact</h3>
-        <p>(501) 545-0088<br>dolphincarwashdetail@gmail.com</p>
+        <p><a href="tel:+15015450088">(501) 545-0088</a><br><a href="mailto:dolphincarwashdetail@gmail.com">dolphincarwashdetail@gmail.com</a></p>
       </div>
     </div>
   </div>
@@ -670,3 +670,5 @@
     <div>© 2026 — Family owned &amp; operated since 2019</div>
   </div>
 </footer>
+</body>
+</html>
