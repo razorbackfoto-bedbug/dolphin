@@ -1,0 +1,672 @@
+<title>Dolphin's Car Wash & Detail</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800&family=Work+Sans:wght@400;500;600;700&family=Roboto+Mono:wght@500;600&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --ink: #14171b;
+    --ink-soft: #1e2228;
+    --paper: #f1f2ee;
+    --paper-dim: #e7e8e2;
+    --card: #ffffff;
+    --text: #1d2024;
+    --text-mute: #565c63;
+    --line: #d8d9d2;
+    --gold: #1c7a80;
+    --gold-deep: #135c61;
+    --red: #a73a2a;
+    --red-deep: #832c20;
+    --shadow: rgba(20, 23, 27, 0.10);
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --ink: #f1f2ee;
+      --ink-soft: #dcdcd6;
+      --paper: #101215;
+      --paper-dim: #17191d;
+      --card: #1a1d22;
+      --text: #eceee9;
+      --text-mute: #a7abaf;
+      --line: #2a2d33;
+      --gold: #3fb6bd;
+      --gold-deep: #1c7a80;
+      --red: #c9503b;
+      --red-deep: #a73a2a;
+      --shadow: rgba(0, 0, 0, 0.45);
+    }
+  }
+
+  :root[data-theme="dark"] {
+    --ink: #f1f2ee;
+    --ink-soft: #dcdcd6;
+    --paper: #101215;
+    --paper-dim: #17191d;
+    --card: #1a1d22;
+    --text: #eceee9;
+    --text-mute: #a7abaf;
+    --line: #2a2d33;
+    --gold: #3fb6bd;
+    --gold-deep: #1c7a80;
+    --red: #c9503b;
+    --red-deep: #a73a2a;
+    --shadow: rgba(0, 0, 0, 0.45);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    * { animation: none !important; transition: none !important; }
+  }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--text);
+    font-family: "Work Sans", system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .demo-flag {
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.06em;
+    padding: 8px 16px;
+  }
+  .demo-flag b { color: var(--gold); }
+
+  h1, h2, h3 {
+    font-family: "Big Shoulders Display", system-ui, sans-serif;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    text-wrap: balance;
+    margin: 0;
+    color: var(--text);
+  }
+
+  .wrap {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  .eyebrow {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gold-deep);
+  }
+
+  /* NAV */
+  nav {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  nav .wrap {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 68px;
+  }
+  .brand {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-weight: 800;
+    font-size: 1.4rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+  .brand span { color: var(--gold); }
+  .navlinks {
+    display: flex;
+    gap: 28px;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    font-size: 0.9rem;
+    font-weight: 500;
+  }
+  .navlinks a { color: var(--text-mute); text-decoration: none; }
+  .navlinks a:hover, .navlinks a:focus-visible { color: var(--text); }
+  .nav-cta {
+    background: var(--red);
+    color: #fdf6f2;
+    border: none;
+    padding: 10px 20px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 2px;
+  }
+  .nav-cta:hover { background: var(--red-deep); }
+
+  a:focus-visible, button:focus-visible, .card:focus-visible {
+    outline: 2px solid var(--gold);
+    outline-offset: 3px;
+  }
+
+  /* HERO */
+  .hero {
+    position: relative;
+    background: var(--ink);
+    color: var(--paper);
+    overflow: hidden;
+  }
+  .hero::before {
+    content: "";
+    position: absolute;
+    inset: -20% -10%;
+    background:
+      radial-gradient(ellipse 60% 50% at 78% 20%, color-mix(in srgb, var(--gold) 30%, transparent), transparent 60%),
+      linear-gradient(115deg, transparent 0%, transparent 42%, color-mix(in srgb, var(--gold) 16%, transparent) 43%, transparent 46%);
+    pointer-events: none;
+  }
+  .hero-inner {
+    position: relative;
+    padding: 96px 0 84px;
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 48px;
+    align-items: center;
+  }
+  .hero h1 {
+    font-size: clamp(2.6rem, 5.2vw, 4.4rem);
+    line-height: 0.96;
+    color: var(--paper);
+  }
+  .hero h1 em {
+    font-style: normal;
+    color: var(--gold);
+  }
+  .hero p.lede {
+    font-size: 1.08rem;
+    line-height: 1.55;
+    color: color-mix(in srgb, var(--paper) 78%, transparent);
+    max-width: 46ch;
+    margin: 20px 0 30px;
+  }
+  .hero-ctas { display: flex; gap: 14px; flex-wrap: wrap; }
+  .btn-primary {
+    background: var(--gold);
+    color: #1a1206;
+    font-weight: 700;
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    display: inline-block;
+  }
+  .btn-primary:hover { background: #26999f; }
+  .btn-ghost {
+    border: 1px solid color-mix(in srgb, var(--paper) 35%, transparent);
+    color: var(--paper);
+    text-decoration: none;
+    padding: 14px 26px;
+    border-radius: 2px;
+    font-size: 0.95rem;
+    display: inline-block;
+  }
+  .btn-ghost:hover { border-color: var(--gold); color: var(--gold); }
+
+  .hero-stats {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1px;
+    background: color-mix(in srgb, var(--paper) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--paper) 14%, transparent);
+  }
+  .hero-stats div {
+    background: var(--ink);
+    padding: 22px 20px;
+  }
+  .hero-stats .num {
+    font-family: "Big Shoulders Display", sans-serif;
+    font-size: 2.1rem;
+    font-weight: 700;
+    color: var(--gold);
+    font-variant-numeric: tabular-nums;
+    line-height: 1;
+  }
+  .hero-stats .lbl {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: color-mix(in srgb, var(--paper) 60%, transparent);
+    margin-top: 8px;
+  }
+
+  /* SECTION SHELL */
+  section { padding: 76px 0; }
+  .section-head {
+    max-width: 56ch;
+    margin-bottom: 42px;
+  }
+  .section-head h2 {
+    font-size: clamp(1.9rem, 3.4vw, 2.6rem);
+    margin-top: 8px;
+  }
+  .section-head p {
+    color: var(--text-mute);
+    line-height: 1.6;
+    margin-top: 12px;
+  }
+
+  /* SERVICES */
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    padding: 28px 24px;
+    border-radius: 3px;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .card.featured {
+    border-color: var(--gold);
+    box-shadow: 0 12px 28px -12px var(--shadow);
+    position: relative;
+  }
+  .card.featured::before {
+    content: "MOST BOOKED";
+    position: absolute;
+    top: -11px;
+    left: 24px;
+    background: var(--gold);
+    color: #06282a;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.62rem;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 2px;
+  }
+  .card h3 {
+    font-size: 1.35rem;
+    text-transform: none;
+    font-family: "Work Sans", sans-serif;
+    font-weight: 700;
+  }
+  .price {
+    font-family: "Roboto Mono", monospace;
+    font-size: 1.6rem;
+    font-weight: 600;
+    color: var(--text);
+    font-variant-numeric: tabular-nums;
+  }
+  .price sup { font-size: 0.85rem; color: var(--text-mute); font-weight: 500; }
+  .card ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    font-size: 0.92rem;
+    color: var(--text-mute);
+    flex: 1;
+  }
+  .card ul li::before { content: "— "; color: var(--gold-deep); }
+  .card .book-link {
+    color: var(--red);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.9rem;
+    margin-top: 4px;
+  }
+  .card .book-link:hover { text-decoration: underline; }
+
+  /* GALLERY */
+  .gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+  }
+  .gallery-grid .shot {
+    aspect-ratio: 4/5;
+    border-radius: 3px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-end;
+    padding: 12px;
+  }
+  .gallery-grid .shot span {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.68rem;
+    letter-spacing: 0.05em;
+    color: rgba(255,255,255,0.9);
+    text-transform: uppercase;
+    position: relative;
+  }
+  .shot.g1 { background: linear-gradient(160deg, #2b2f36, #14171b 70%); }
+  .shot.g2 { background: linear-gradient(160deg, #4a3418, #1c1610 70%); }
+  .shot.g3 { background: linear-gradient(160deg, #1f2a2a, #10151a 70%); }
+  .shot.g4 { background: linear-gradient(160deg, #3a2420, #17100f 70%); }
+  .shot::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);
+  }
+
+  /* TESTIMONIALS */
+  .testi-note {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.78rem;
+    color: var(--text-mute);
+    margin-bottom: 28px;
+  }
+  .testi-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .testi {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-left: 3px solid var(--gold);
+    padding: 22px 22px 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .testi .stars { color: var(--gold); letter-spacing: 2px; font-size: 0.9rem; }
+  .testi p { margin: 0; line-height: 1.55; color: var(--text); font-size: 0.95rem; }
+  .testi .who {
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.72rem;
+    color: var(--text-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+  }
+
+  /* BOOKING */
+  .booking {
+    background: var(--ink-soft);
+    color: var(--paper);
+  }
+  .booking-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    align-items: center;
+  }
+  .booking .eyebrow { color: var(--gold); }
+  .booking h2 { color: var(--paper); margin-top: 8px; }
+  .booking p { color: color-mix(in srgb, var(--paper) 75%, transparent); line-height: 1.6; margin-top: 14px; }
+  .book-widget {
+    background: var(--paper);
+    color: var(--text);
+    border-radius: 4px;
+    padding: 26px;
+  }
+  .book-widget .bw-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--line);
+    padding-bottom: 14px;
+  }
+  .book-widget .bw-head b { font-family: "Big Shoulders Display", sans-serif; font-size: 1.15rem; text-transform: uppercase; }
+  .book-widget .bw-head span { font-family: "Roboto Mono", monospace; font-size: 0.68rem; color: var(--text-mute); }
+  .bw-days { display: grid; grid-template-columns: repeat(6, 1fr); gap: 6px; margin-bottom: 16px; }
+  .bw-days div {
+    text-align: center;
+    padding: 8px 0;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.75rem;
+  }
+  .bw-days div.on { background: var(--gold); color: #06282a; border-color: var(--gold); font-weight: 600; }
+  .bw-slot {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    font-size: 0.85rem;
+    margin-bottom: 8px;
+  }
+  .bw-slot b { font-variant-numeric: tabular-nums; }
+  .bw-cta {
+    width: 100%;
+    background: var(--red);
+    color: #fdf6f2;
+    border: none;
+    padding: 13px;
+    font-weight: 700;
+    border-radius: 2px;
+    margin-top: 6px;
+    cursor: pointer;
+    font-size: 0.92rem;
+  }
+  .bw-cta:hover { background: var(--red-deep); }
+  .bw-foot { font-family: "Roboto Mono", monospace; font-size: 0.66rem; color: var(--text-mute); text-align: center; margin-top: 10px; }
+
+  /* INFO STRIP */
+  .info-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 18px;
+  }
+  .info-strip .card h3 { font-size: 1.05rem; margin: 0; }
+  .info-strip .card p { color: var(--text-mute); font-size: 0.9rem; line-height: 1.6; margin: 0; }
+
+  footer {
+    border-top: 1px solid var(--line);
+    padding: 32px 0;
+  }
+  footer .wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.82rem;
+    color: var(--text-mute);
+  }
+  footer .brand { font-size: 1rem; }
+
+  @media (max-width: 860px) {
+    .hero-inner { grid-template-columns: 1fr; padding: 64px 0 48px; }
+    .services-grid, .gallery-grid, .testi-grid, .info-strip { grid-template-columns: 1fr 1fr; }
+    .booking-inner { grid-template-columns: 1fr; }
+    .navlinks { display: none; }
+  }
+  @media (max-width: 560px) {
+    .gallery-grid { grid-template-columns: 1fr 1fr; }
+    .services-grid, .testi-grid, .info-strip { grid-template-columns: 1fr; }
+    .hero-stats { grid-template-columns: 1fr 1fr; }
+  }
+</style>
+
+<div class="demo-flag">MOCKUP FOR PITCH USE ONLY &nbsp;·&nbsp; business info pulled from their real Yelp/Facebook listings &nbsp;·&nbsp; <b>confirm pricing &amp; add real photos</b> before showing the owner</div>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">DOLPHIN'S<span>·</span>DETAIL</div>
+    <ul class="navlinks">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#gallery">Gallery</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#book">Hours &amp; Location</a></li>
+    </ul>
+    <button class="nav-cta">Book Now</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-inner">
+    <div>
+      <p class="eyebrow" style="color:var(--gold)">Malvern, AR &nbsp;·&nbsp; Family-owned since 2019</p>
+      <h1>Your car,<br><em>showroom clean</em>,<br>same day.</h1>
+      <p class="lede">Hand wash, touchless wash, full interior detailing and ceramic sealant — done right by the same crew Malvern already trusts. Call ahead on a busy Saturday, walk in any other day.</p>
+      <div class="hero-ctas">
+        <a class="btn-primary" href="#book">Book an Appointment</a>
+        <a class="btn-ghost" href="#services">See Services</a>
+      </div>
+    </div>
+    <div class="hero-stats">
+      <div><div class="num">30+</div><div class="lbl">Google reviews</div></div>
+      <div><div class="num">5.0</div><div class="lbl">Star rating on Yelp</div></div>
+      <div><div class="num">6+</div><div class="lbl">Years serving Malvern</div></div>
+      <div><div class="num">Full</div><div class="lbl">Lot most Saturdays — book ahead</div></div>
+    </div>
+  </div>
+</header>
+
+<section id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Services</p>
+      <h2>Pick your level of clean</h2>
+      <p>Pulled from their current service list — real prices weren't posted publicly, so pricing shows as "call to confirm" until the owner fills it in.</p>
+    </div>
+    <div class="services-grid">
+      <div class="card">
+        <h3>Touchless Wash</h3>
+        <div class="price" style="font-size:1.05rem">Call for pricing</div>
+        <ul>
+          <li>Brushless exterior wash</li>
+          <li>Wheels &amp; tires cleaned</li>
+          <li>Windows in &amp; out</li>
+          <li>Vacuum front &amp; rear</li>
+        </ul>
+        <a class="book-link" href="#book">Book Touchless Wash →</a>
+      </div>
+      <div class="card featured">
+        <h3>Full Interior &amp; Exterior Detail</h3>
+        <div class="price" style="font-size:1.05rem">Call for pricing</div>
+        <ul>
+          <li>Everything in Touchless Wash</li>
+          <li>Auto shampoo &amp; interior detail</li>
+          <li>Clay bar treatment &amp; hand wax</li>
+          <li>Headlight restoration</li>
+          <li>Engine bay cleaning</li>
+        </ul>
+        <a class="book-link" href="#book">Book Full Detail →</a>
+      </div>
+      <div class="card">
+        <h3>Ceramic Sealant</h3>
+        <div class="price" style="font-size:1.05rem">Call for pricing</div>
+        <ul>
+          <li>Everything in Full Detail</li>
+          <li>Paint decontamination</li>
+          <li>Ceramic-grade sealant</li>
+          <li>Longer-lasting shine &amp; protection</li>
+        </ul>
+        <a class="book-link" href="#book">Book Ceramic →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="gallery" style="background:var(--paper-dim)">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">Recent work</p>
+      <h2>Before &amp; after</h2>
+      <p>Swap these four tiles for real phone photos of finished cars — that's what sells a detail shop, not stock images.</p>
+    </div>
+    <div class="gallery-grid">
+      <div class="shot g1"><span>Interior — before/after</span></div>
+      <div class="shot g2"><span>Wheels &amp; trim</span></div>
+      <div class="shot g3"><span>Paint correction</span></div>
+      <div class="shot g4"><span>Full exterior shine</span></div>
+    </div>
+  </div>
+</section>
+
+<section id="reviews">
+  <div class="wrap">
+    <div class="section-head">
+      <p class="eyebrow">What customers say</p>
+      <h2>30+ Google reviews. 5.0 stars on Yelp.</h2>
+      <p class="testi-note">Real quotes pulled from their Yelp listing — worth asking the owner before publishing names on a new site.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"My Mom's 20-year-old Ford SUV needed some serious attention, so I brought it into Dolphin's for an exterior wash and interior detailing. And they did an AMAZING job!"</p>
+        <div class="who">— Greg D., Yelp</div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"I called these guys on a Monday (their day off) and they answered the phone. I made an appointment for Tuesday at 10am. When I rolled up at 9:55, they jumped on my SUV and started cleaning."</p>
+        <div class="who">— Alan P., Yelp</div>
+      </div>
+      <div class="testi">
+        <div class="stars">★★★★★</div>
+        <p>"Amazing service! Very thorough! If you need detailing, they will do an excellent job. They were helpful, respectful, kind and very personable."</p>
+        <div class="who">— Yelp review</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="booking" id="book">
+  <div class="wrap booking-inner">
+    <div>
+      <p class="eyebrow">Skip the phone tag</p>
+      <h2>Book online,<br>anytime.</h2>
+      <p>Free Square Appointments widget, embedded right on the site — customers grab an open slot without calling during a Saturday rush, and get an automatic text reminder the day before. Same account can take card payment on-site if they ever want that too.</p>
+      <p style="margin-top:22px"><a class="btn-primary" href="#">Open Full Scheduler</a></p>
+    </div>
+    <div class="book-widget" aria-label="Sample Square Appointments booking widget">
+      <div class="bw-head">
+        <b>Book a Detail</b>
+        <span>POWERED BY SQUARE</span>
+      </div>
+      <div class="bw-days">
+        <div>MON</div><div class="on">TUE</div><div>WED</div><div>THU</div><div class="on">FRI</div><div>SAT</div>
+      </div>
+      <div class="bw-slot"><span>Full Detail</span><b>9:00 AM</b></div>
+      <div class="bw-slot"><span>Full Detail</span><b>11:30 AM</b></div>
+      <div class="bw-slot"><span>Touchless Wash</span><b>2:00 PM</b></div>
+      <button class="bw-cta">Confirm 11:30 AM — Full Detail</button>
+      <div class="bw-foot">Confirmation &amp; reminder sent by text automatically · square.com</div>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="wrap">
+    <div class="info-strip">
+      <div class="card">
+        <h3>Hours</h3>
+        <p>Tue–Fri, 8:00 AM – 5:00 PM<br>Sat, 8:00 AM – 2:00 PM<br>Closed Sun &amp; Mon</p>
+      </div>
+      <div class="card">
+        <h3>Location</h3>
+        <p>329 E Page Ave<br>Malvern, AR 72104</p>
+      </div>
+      <div class="card">
+        <h3>Contact</h3>
+        <p>(501) 545-0088<br>dolphincarwashdetail@gmail.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">DOLPHIN'S·DETAIL</div>
+    <div>© 2026 — Family owned &amp; operated since 2019</div>
+  </div>
+</footer>
