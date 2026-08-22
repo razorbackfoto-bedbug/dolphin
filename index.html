@@ -362,6 +362,22 @@
     display: flex;
     align-items: flex-end;
     padding: 12px;
+    background: var(--ink);
+  }
+  .gallery-grid .shot img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 300ms ease;
+  }
+  .gallery-grid .shot:hover img { transform: scale(1.04); }
+  .gallery-grid .shot::after {
+    content: "";
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.62), transparent 58%);
+    pointer-events: none;
   }
   .gallery-grid .shot span {
     font-family: "Roboto Mono", monospace;
@@ -371,15 +387,6 @@
     text-transform: uppercase;
     position: relative;
     z-index: 1;
-  }
-  .shot.g1 { background: linear-gradient(160deg, #2b2f36, #14171b 70%); }
-  .shot.g2 { background: linear-gradient(160deg, #4a3418, #1c1610 70%); }
-  .shot.g3 { background: linear-gradient(160deg, #1f2a2a, #10151a 70%); }
-  .shot.g4 { background: linear-gradient(160deg, #3a2420, #17100f 70%); }
-  .shot::after {
-    content: "";
-    position: absolute; inset: 0;
-    background: linear-gradient(0deg, rgba(0,0,0,0.55), transparent 55%);
   }
 
   .testi-note {
@@ -599,10 +606,10 @@
       <p>Swap these four tiles for real phone photos of finished cars &mdash; that's what sells a detail shop, not stock images.</p>
     </div>
     <div class="gallery-grid">
-      <div class="shot g1"><span>Interior &mdash; before/after</span></div>
-      <div class="shot g2"><span>Wheels &amp; trim</span></div>
-      <div class="shot g3"><span>Paint correction</span></div>
-      <div class="shot g4"><span>Full exterior shine</span></div>
+      <div class="shot g1"><img src="assets/gallery-interior-before-after.png" alt="Car interior shown before and after professional detailing"><span>Interior &mdash; before/after</span></div>
+      <div class="shot g2"><img src="assets/gallery-wheels-trim.png" alt="Glossy alloy wheel and freshly dressed tire"><span>Wheels &amp; trim</span></div>
+      <div class="shot g3"><img src="assets/gallery-paint-correction.png" alt="Deep blue paint before and after correction"><span>Paint correction</span></div>
+      <div class="shot g4"><img src="assets/gallery-exterior-shine.png" alt="Freshly detailed SUV with a full exterior shine"><span>Full exterior shine</span></div>
     </div>
   </div>
 </section>
