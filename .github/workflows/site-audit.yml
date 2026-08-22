@@ -1,0 +1,45 @@
+name: Site audit
+
+on:
+  push:
+    branches: [main, bugfix/site-audit]
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+
+jobs:
+  html-audit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Validate index.html structure and placeholders
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+
+          html = Path("index.html").read_text(encoding="utf-8")
+          required = ["<!doctype html>", "<html", "<head", "<body"]
+          missing = [x for x in required if x.lower() not in html.lower()]
+          if missing:
+              print("Missing expected document structure:", ", ".join(missing))
+              raise SystemExit(1)
+
+          if not re.search(r"</html>\s*$", html, re.IGNORECASE):
+              print("index.html does not end with </html>")
+              raise SystemExit(1)
+
+          if 'href="#"' in html or "href='#'" in html:
+              print("Found dead placeholder links (href=\"#\").")
+              raise SystemExit(1)
+
+          if '<meta name="viewport"' not in html.lower():
+              print("Missing mobile viewport metadata.")
+              raise SystemExit(1)
+
+          print("index.html structure and placeholder checks passed.")
+          PY
