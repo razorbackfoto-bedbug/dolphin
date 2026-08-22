@@ -29,7 +29,7 @@ jobs:
               print("Missing expected document structure:", ", ".join(missing))
               raise SystemExit(1)
 
-          if not re.search(r"</html>\\s*$", html, re.IGNORECASE):
+          if not re.search(r"</html>\s*$", html, re.IGNORECASE):
               print("index.html does not end with </html>")
               raise SystemExit(1)
 
