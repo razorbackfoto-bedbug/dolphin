@@ -1,42 +1,37 @@
-name: Deploy Preview
+name: Deploy to GitHub Pages
 
 on:
   push:
     branches: [main]
   workflow_dispatch: {}
 
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      # Uncomment and adjust once this repo has a real build step
-      # - name: Setup Node
-      #   uses: actions/setup-node@v4
-      #   with:
-      #     node-version: 20
-      # - name: Install dependencies
-      #   run: npm ci
-      # - name: Build
-      #   run: npm run build
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
 
-      - name: Deploy via rsync
-        env:
-          SSH_PRIVATE_KEY: ${{ secrets.DOLPHINSCARWASH_DEPLOY_KEY }}
-          DEPLOY_HOST: ${{ secrets.DEPLOY_HOST }}
-          DEPLOY_USER: ${{ secrets.DEPLOY_USER }}
-        run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/deploy_key
-          chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H "$DEPLOY_HOST" >> ~/.ssh/known_hosts
+      - name: Upload site
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: .
 
-          # Deploys the repo root as-is. Point --exclude/-source at a build
-          # output directory (e.g. dist/) once this repo has a build step.
-          rsync -avz --delete \
-            -e "ssh -i ~/.ssh/deploy_key -o UserKnownHostsFile=~/.ssh/known_hosts" \
-            --exclude '.git' \
-            --exclude '.github' \
-            ./ "$DEPLOY_USER@$DEPLOY_HOST:/var/www/previews/dolphinscarwash/"
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
