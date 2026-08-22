@@ -491,8 +491,18 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 18px;
   }
-  .info-strip .card h3 { font-size: 1.05rem; margin: 0; }
-  .info-strip .card p { color: var(--text-mute); font-size: 0.9rem; line-height: 1.6; margin: 0; }
+  #contact { background: var(--paper-dim); }
+  .info-strip .card { min-height: 142px; padding: 22px 24px; gap: 10px; }
+  .info-strip .card h3 {
+    margin: 0;
+    color: var(--gold-deep);
+    font-family: "Roboto Mono", monospace;
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+  }
+  .info-strip .card p { color: var(--text); font-size: 1rem; line-height: 1.65; margin: 0; }
+  .info-strip .card a { color: var(--text); font-weight: 600; text-underline-offset: 3px; }
 
   footer {
     border-top: 1px solid var(--line);
