@@ -180,10 +180,11 @@
     position: relative;
     padding: 96px 0 84px;
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
     gap: 48px;
     align-items: center;
   }
+  .hero-inner > div { min-width: 0; }
   .hero h1 {
     font-size: clamp(2.6rem, 5.2vw, 4.4rem);
     line-height: 0.96;
@@ -228,9 +229,11 @@
     grid-template-columns: 1fr;
     gap: 0;
     align-self: center;
+    width: 100%;
+    min-width: 0;
     padding: 24px 26px 10px;
-    background: color-mix(in srgb, var(--paper) 82%, var(--gold) 18%);
-    border: 1px solid color-mix(in srgb, var(--text) 15%, transparent);
+    background: color-mix(in srgb, var(--ink) 88%, var(--gold) 12%);
+    border: 1px solid color-mix(in srgb, var(--paper) 18%, transparent);
     border-radius: 8px;
     box-shadow: 0 18px 38px var(--shadow);
   }
@@ -251,7 +254,7 @@
     align-items: center;
     min-height: 78px;
     padding: 14px 0;
-    border-bottom: 1px solid color-mix(in srgb, var(--text) 14%, transparent);
+    border-bottom: 1px solid color-mix(in srgb, var(--paper) 16%, transparent);
   }
   .hero-stats div:last-child {
     border-bottom: none;
@@ -269,7 +272,7 @@
     font-size: 0.68rem;
     letter-spacing: 0.06em;
     text-transform: uppercase;
-    color: color-mix(in srgb, var(--paper) 60%, transparent);
+    color: color-mix(in srgb, var(--paper) 72%, var(--ink) 28%);
     margin-top: 0;
     line-height: 1.35;
     max-width: 18ch;
