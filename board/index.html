@@ -15,12 +15,13 @@
 <body>
 <div class="app">
   <aside class="sidebar" id="sidebar">
-    <div class="brand">
-      <div class="brand-mark"><img src="assets/logo.png" alt=""></div>
-      <div>
-        <div class="brand-kicker">Friends of the</div>
-        <div class="brand-name">Mother Fucking Library</div>
+    <div class="brand" aria-label="Friends of the Mother Fucking Library">
+      <div class="brand-top">
+        <div class="brand-mark"><img src="assets/logo.png" alt=""></div>
+        <div class="brand-kicker">Friends<br>of the</div>
       </div>
+      <div class="mf">Mother Fucking</div>
+      <div class="brand-name">Library</div>
     </div>
     <button class="btn btn-primary btn-block" id="newMeetingBtn">
       <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
@@ -38,6 +39,12 @@
   <div class="scrim" id="scrim"></div>
 
   <main class="main">
+    <div class="mobile-brand" aria-hidden="true">
+      <img src="assets/logo.png" alt="">
+      <span class="mb-small">Friends of the</span>
+      <span class="mf">Mother Fucking</span>
+      <span class="mb-lib">Library</span>
+    </div>
     <header class="topbar">
       <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open meetings list">
         <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>

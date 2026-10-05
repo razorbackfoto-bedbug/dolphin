@@ -248,6 +248,7 @@ function render() {
   const m = cur();
   $('#tabs').hidden = !m;
   $('#delMeetingBtn').hidden = !m;
+  document.body.classList.toggle('no-meeting', !m);
   $$('#tabs .tab').forEach((t) => t.setAttribute('aria-selected', String(t.dataset.tab === state.tab)));
   const v = $('#view');
   if (!m) { v.innerHTML = renderEmpty(); return; }
@@ -281,6 +282,11 @@ function renderEmpty() {
   const needsRoster = !members().length;
   return `<div class="empty-state">
     <img src="assets/logo.png" alt="">
+    <div class="hero-mark">
+      <span class="hero-small">Friends of the</span>
+      <span class="mf">Mother Fucking</span>
+      <span class="hero-lib">Library</span>
+    </div>
     <h2>Let’s make minutes painless.</h2>
     <p>Build the agenda, take notes live (by typing or talking), and walk out with an editable Word doc.</p>
     <div class="row" style="justify-content:center">

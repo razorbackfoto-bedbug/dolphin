@@ -103,17 +103,39 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .main { min-width: 0; display: flex; flex-direction: column; }
 .scrim { display: none; }
 
-.brand { display: flex; gap: 12px; align-items: center; padding: 2px 4px 6px; }
+.brand { display: flex; flex-direction: column; align-items: flex-start; gap: 6px; padding: 2px 4px 10px; }
+.brand-top { display: flex; align-items: center; gap: 10px; }
 .brand-mark {
   width: 44px; height: 44px; border-radius: 12px; flex: none; overflow: hidden;
   background: var(--accent); box-shadow: inset 0 0 0 1px rgba(0,0,0,.06);
 }
 .brand-mark img { width: 100%; height: 100%; display: block; }
-.brand-kicker { font-size: 11px; letter-spacing: .08em; text-transform: uppercase; color: var(--mute); font-weight: 600; }
+.brand-kicker { font-size: 12px; line-height: 1.2; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); font-weight: 700; }
+.brand .mf { font-size: 21px; margin: 4px 0 2px -2px; }
 .brand-name {
-  font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 17px; line-height: 1.15;
-  color: var(--ink); letter-spacing: -.01em;
+  font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 26px; line-height: 1;
+  color: var(--ink); letter-spacing: -.01em; padding-left: 2px; margin-top: 4px;
 }
+
+/* The gag: "Mother Fucking" as a slapped-on sticker */
+.mf {
+  display: inline-block; white-space: nowrap;
+  background: var(--accent); color: var(--accent-ink);
+  font-family: Inter, system-ui, sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: .015em;
+  line-height: 1.05; padding: .16em .4em .12em; border-radius: .2em;
+  transform: rotate(-2.5deg);
+  box-shadow: 0 2px 0 rgba(0, 0, 0, .22), 0 8px 18px -8px color-mix(in srgb, var(--accent) 80%, transparent);
+  transition: transform .2s cubic-bezier(.3, 1.6, .5, 1);
+}
+.mf:hover { transform: rotate(1.5deg) scale(1.05); }
+
+.mobile-brand { display: none; }
+.hero-mark { display: flex; flex-direction: column; align-items: center; gap: 8px; margin: 18px 0 6px; }
+.hero-small { font-size: 13px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--mute); }
+.hero-mark .mf { font-size: clamp(30px, 7vw, 46px); }
+.hero-lib { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: clamp(30px, 6vw, 42px); line-height: 1; color: var(--ink); }
+.empty-state .hero-mark + h2 { font-size: 20px; margin-top: 22px; }
+
 .side-label {
   font-size: 11px; font-weight: 600; letter-spacing: .08em; text-transform: uppercase;
   color: var(--faint); padding: 6px 6px 0;
@@ -140,7 +162,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
   -webkit-backdrop-filter: saturate(1.4) blur(12px);
   border-bottom: 1px solid var(--line);
 }
-.menu-btn { display: none; }
+.topbar .menu-btn { display: none; }
 .meeting-head { flex: 1; min-width: 0; }
 .meeting-head h1 {
   margin: 0; font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 22px;
@@ -361,7 +383,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 .toast {
   position: fixed; left: 50%; bottom: 24px; transform: translate(-50%, 20px); opacity: 0; pointer-events: none;
   background: var(--ink); color: var(--bg); padding: 11px 18px; border-radius: 12px; font-weight: 500; font-size: 14px;
-  box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: all .25s; z-index: 100; max-width: calc(100vw - 32px);
+  box-shadow: 0 10px 30px rgba(0,0,0,.25); transition: all .25s; z-index: 100; width: max-content; max-width: calc(100vw - 32px); text-align: center;
 }
 .toast.show { opacity: 1; transform: translate(-50%, 0); }
 .modal {
@@ -398,11 +420,20 @@ button, input, select, textarea { font: inherit; color: inherit; }
   .app { grid-template-columns: 1fr; }
   .sidebar {
     position: fixed; left: 0; top: 0; bottom: 0; width: min(300px, 86vw); z-index: 60;
-    transform: translateX(-102%); transition: transform .25s ease; box-shadow: 0 0 40px rgba(0,0,0,.25);
+    transform: translateX(-102%); transition: transform .25s ease;
   }
-  .sidebar.open { transform: none; }
+  .sidebar.open { transform: none; box-shadow: 0 0 40px rgba(0,0,0,.25); }
+  .no-meeting .mobile-brand { display: none; }
   .scrim.show { display: block; position: fixed; inset: 0; background: rgba(0,0,0,.4); z-index: 50; }
-  .menu-btn { display: inline-grid; }
+  .topbar .menu-btn { display: inline-grid; }
+  .mobile-brand {
+    display: flex; flex-wrap: wrap; align-items: center; justify-content: center; gap: 6px 10px;
+    padding: 14px 16px 12px; background: var(--card); border-bottom: 1px solid var(--line);
+  }
+  .mobile-brand img { width: 30px; height: 30px; border-radius: 8px; }
+  .mobile-brand .mb-small { font-size: 12px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--mute); }
+  .mobile-brand .mf { font-size: 22px; }
+  .mobile-brand .mb-lib { font-family: Fraunces, Georgia, serif; font-weight: 600; font-size: 24px; color: var(--ink); line-height: 1; }
   .topbar, .tabs { padding-left: 16px; padding-right: 16px; }
   .view { padding: 18px 16px 120px; }
   .g3, .g4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -419,7 +450,7 @@ button, input, select, textarea { font: inherit; color: inherit; }
 }
 
 @media print {
-  .sidebar, .topbar, .tabs, .export-side, .doc-toggle, .toast { display: none !important; }
+  .sidebar, .topbar, .tabs, .export-side, .doc-toggle, .toast, .mobile-brand { display: none !important; }
   .app { display: block; }
   .view { padding: 0; max-width: none; }
   .export { display: block; }
