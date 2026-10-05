@@ -1,0 +1,9 @@
+// Cloudflare Workers Builds config: serve this repo as a static site (no build step).
+// GitHub Pages deploys the same files independently (see .github/workflows).
+{
+  "name": "dolphin",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "."
+  }
+}
