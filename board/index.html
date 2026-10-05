@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Friends of the Mother Fucking Library</title>
+<meta name="description" content="Build board meeting agendas, take minutes live with voice dictation, and export editable Word documents.">
+<meta name="theme-color" content="#f28c1b">
+<link rel="icon" href="assets/logo.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app">
+  <aside class="sidebar" id="sidebar">
+    <div class="brand" aria-label="Friends of the Mother Fucking Library">
+      <div class="brand-top">
+        <div class="brand-mark"><img src="assets/logo.png" alt=""></div>
+        <div class="brand-kicker">Friends<br>of the</div>
+      </div>
+      <div class="mf">Mother Fucking</div>
+      <div class="brand-name">Library</div>
+    </div>
+    <button class="btn btn-primary btn-block" id="newMeetingBtn">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>
+      New meeting
+    </button>
+    <div class="side-label">Meetings</div>
+    <nav class="meeting-list" id="meetingList"></nav>
+    <div class="side-foot">
+      <button class="btn btn-ghost btn-block" id="settingsBtn">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        Board &amp; settings
+      </button>
+    </div>
+  </aside>
+  <div class="scrim" id="scrim"></div>
+
+  <main class="main">
+    <div class="mobile-brand" aria-hidden="true">
+      <img src="assets/logo.png" alt="">
+      <span class="mb-small">Friends of the</span>
+      <span class="mf">Mother Fucking</span>
+      <span class="mb-lib">Library</span>
+    </div>
+    <header class="topbar">
+      <button class="icon-btn menu-btn" id="menuBtn" aria-label="Open meetings list">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 6h16M4 12h16M4 18h16"/></svg>
+      </button>
+      <div class="meeting-head" id="meetingHead"></div>
+      <button class="icon-btn" id="delMeetingBtn" data-act="del-meeting" title="Delete this meeting" aria-label="Delete this meeting" hidden>
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h16M10 11v6M14 11v6M6 7l1 13h10l1-13M9 7V4h6v3"/></svg>
+      </button>
+      <div class="rec-pill" id="recPill" hidden>
+        <span class="rec-dot"></span><span id="recTime">00:00</span>
+      </div>
+    </header>
+
+    <div class="tabs" role="tablist" id="tabs">
+      <button role="tab" data-tab="agenda" class="tab">
+        <span class="tab-num">1</span> Agenda
+      </button>
+      <button role="tab" data-tab="live" class="tab">
+        <span class="tab-num">2</span> <span><span class="long">Take </span>minutes</span>
+      </button>
+      <button role="tab" data-tab="export" class="tab">
+        <span class="tab-num">3</span> <span><span class="long">Review &amp; </span>export</span>
+      </button>
+    </div>
+
+    <section class="view" id="view"></section>
+  </main>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+<dialog class="modal" id="modal"></dialog>
+
+<script src="app.js"></script>
+</body>
+</html>
